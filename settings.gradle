@@ -1,3 +1,5 @@
+include ':engine'
+include ':receiver'
 include ':middleman'
 include ':emitter'
 rootProject.name = "Yello task"

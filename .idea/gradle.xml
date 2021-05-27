@@ -12,7 +12,9 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/emitter" />
+            <option value="$PROJECT_DIR$/engine" />
             <option value="$PROJECT_DIR$/middleman" />
+            <option value="$PROJECT_DIR$/receiver" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

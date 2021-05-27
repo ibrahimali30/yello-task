@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.ibrahim.middleman">
+    package="com.ibrahim.receiver">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
 
     <application
         android:allowBackup="true"
@@ -10,8 +12,8 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Emitter">
-        <activity android:name=".MainActivity">
+        android:theme="@style/Theme.YelloTask">
+        <activity android:name=".ReceiverMainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -19,14 +21,6 @@
             </intent-filter>
         </activity>
 
-        <receiver
-            android:name=".MiddleManProdCastReceiver"
-            android:enabled="true"
-            android:exported="true" >
-            <intent-filter>
-                <action android:name="com.ibrahim.middleman.ACTION_SEND_USER" />
-            </intent-filter>
-        </receiver>
 
 
     </application>
