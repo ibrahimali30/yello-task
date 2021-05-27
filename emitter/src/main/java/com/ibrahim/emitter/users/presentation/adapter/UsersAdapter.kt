@@ -9,7 +9,10 @@ import com.ibrahim.emitter.R
 import com.ibrahim.emitter.users.data.model.UsersResponseItem
 import kotlinx.android.synthetic.main.layout_words_item.view.*
 
-class UsersAdapter(val data: ArrayList<UsersResponseItem> = java.util.ArrayList()) :
+class UsersAdapter(
+    val data: ArrayList<UsersResponseItem> = java.util.ArrayList(),
+    val onItemClicked: (UsersResponseItem)-> Unit
+) :
     RecyclerView.Adapter<UsersAdapter.ViewHolder>() {
 
 
@@ -27,6 +30,9 @@ class UsersAdapter(val data: ArrayList<UsersResponseItem> = java.util.ArrayList(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(data[position])
+        holder.view.setOnClickListener {
+            onItemClicked(data[position])
+        }
     }
 
     fun setList(list: List<UsersResponseItem>) {
