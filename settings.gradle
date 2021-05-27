@@ -1,2 +1,3 @@
-include ':app'
-rootProject.name = "Emitter"
+include ':middleman'
+include ':emitter'
+rootProject.name = "Yello task"
