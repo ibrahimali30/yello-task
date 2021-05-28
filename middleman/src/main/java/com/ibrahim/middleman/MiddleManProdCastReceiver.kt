@@ -1,9 +1,11 @@
 package com.ibrahim.middleman
 
 import android.content.BroadcastReceiver
+import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.util.Log
+import com.ibrahim.engine.base.*
 import java.io.BufferedReader
 import java.io.InputStreamReader
 import java.io.PrintWriter
@@ -40,14 +42,14 @@ class MiddleManProdCastReceiver : BroadcastReceiver() {
 
                     sendConfirmationToEmitter(
                         applicationContext,
-                        response,
-                        response == "OK"
+                        response
                     )
                 }
 
                 socket.close()
 
-            } catch (e: Exception) {
+            } catch (e: Exception ) {
+                Log.d(TAG, "sendUserJsonToReceiverApp: Exception ${e.message}")
                 e.printStackTrace()
             }
         }
@@ -56,9 +58,18 @@ class MiddleManProdCastReceiver : BroadcastReceiver() {
 
     private fun sendConfirmationToEmitter(
         applicationContext: Context,
-        userJson: String,
-        b: Boolean
+        userJson: String
     ) {
+
+        val intent = Intent(EMITTER_RECEIVER_NAME)
+        intent.action = EMITTER_PACKAGE_NAME
+        intent.putExtra(EXTRA_RESPONSE,userJson)
+        intent.addFlags(Intent.FLAG_INCLUDE_STOPPED_PACKAGES)
+        intent.component =
+            ComponentName(
+                EMITTER_PACKAGE_NAME, EMITTER_RECEIVER_package_NAME
+            )
+        applicationContext.sendBroadcast(intent)
 
     }
 

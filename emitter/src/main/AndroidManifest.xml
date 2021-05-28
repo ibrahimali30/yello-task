@@ -25,7 +25,7 @@
             android:enabled="true"
             android:exported="true" >
             <intent-filter>
-                <action android:name="com.ibrahim.emitter.ACTION_SEND_USER_RESPONSE" />
+                <action android:name="com.ibrahim.emitter.ACTION_USER_ACTION_RESPONSE" />
             </intent-filter>
         </receiver>
 

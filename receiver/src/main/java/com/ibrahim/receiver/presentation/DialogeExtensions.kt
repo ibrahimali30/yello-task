@@ -8,8 +8,8 @@ import androidx.appcompat.app.AlertDialog
     msg: String?,
     onConfirmed: ()->Unit,
     onCanceled: ()->Unit
-) {
-    AlertDialog.Builder(this)
+): AlertDialog? {
+    return AlertDialog.Builder(this)
         .setTitle(title)
         .setMessage(msg)
         .setPositiveButton("OK") { dialog, _ ->

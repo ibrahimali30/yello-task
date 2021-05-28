@@ -43,7 +43,7 @@ class ServerThread() : Thread() {
     }
 
     private fun handleReceivedSocketMessage(userJson: String) {
-        Log.d(TAG, "handleReceivedSocketMessage: $userJson")
+        Log.d(TAG, "handleReceivedSocketMessage e: $userJson")
         liveData.postValue(userJsonToUserModel(userJson))
     }
 

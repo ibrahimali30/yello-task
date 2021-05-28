@@ -8,12 +8,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ibrahim.emitter.R
-import com.ibrahim.engine.base.EXTRA_USER
-import com.ibrahim.engine.base.MIDDLE_MAN_PACKAGE_NAME
-import com.ibrahim.engine.base.MIDDLE_MAN_RECEIVER_NAME
 import com.ibrahim.engine.users.data.model.UserUiModel
 import com.ibrahim.emitter.users.adapter.UsersAdapter
-import com.ibrahim.engine.base.MIDDLE_MAN_RECEIVER_PACKAGE_NAME
+import com.ibrahim.engine.base.*
 import com.ibrahim.engine.users.domain.mapper.toJson
 import com.ibrahim.engine.users.presentation.viewmodel.UsersViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -26,37 +23,35 @@ import javax.inject.Inject
 class UsersListActivity : AppCompatActivity() {
 
     @Inject
-    lateinit var wordsViewModel: UsersViewModel
-
-    val adapter: UsersAdapter by lazy { UsersAdapter(onItemClicked = ::onUserClicked) }
+    lateinit var usersViewModel: UsersViewModel
+    private val usersAdapter: UsersAdapter by lazy { UsersAdapter(onItemClicked = ::onUserClicked) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        wordsViewModel.getUsers()
-
+        usersViewModel.getUsers()
         observeScreenState()
         initRecyclerView()
 
     }
 
     private fun onUserClicked(user: UserUiModel){
-        setBroadCastToMiddleMan(user)
+        sendBroadCastToMiddleMan(user)
         openReceiverActivity()
     }
 
     private fun openReceiverActivity() {
         val intent = Intent()
-        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+//        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         intent.component =
             ComponentName(
-                "com.ibrahim.receiver", "com.ibrahim.receiver.ReceiverMainActivity"
+                RECEIVER_PACKAGE_NAME, RECEIVER_MAIN_ACTIVITY_PACKAGE_NAME
             )
         startActivity(intent)
     }
 
-    private fun setBroadCastToMiddleMan(user: UserUiModel) {
+    private fun sendBroadCastToMiddleMan(user: UserUiModel) {
         val intent = Intent(MIDDLE_MAN_RECEIVER_NAME)
         intent.action = MIDDLE_MAN_PACKAGE_NAME
         intent.putExtra(EXTRA_USER, user.toJson())
@@ -70,11 +65,11 @@ class UsersListActivity : AppCompatActivity() {
 
     private fun initRecyclerView() {
         rvUsers.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        rvUsers.adapter = adapter
+        rvUsers.adapter = usersAdapter
     }
 
     private fun observeScreenState() {
-        wordsViewModel.screenState.observe(this , Observer {
+        usersViewModel.screenState.observe(this , Observer {
             onScreenStateChanged(it)
         })
     }
@@ -86,7 +81,6 @@ class UsersListActivity : AppCompatActivity() {
         when (state) {
             is UsersViewModel.UsersScreenState.SuccessAPIResponse -> handleSuccess(state.data)
             is UsersViewModel.UsersScreenState.ErrorLoadingFromApi -> handleError(state.error)
-
             else -> {}
         }
     }
@@ -97,7 +91,7 @@ class UsersListActivity : AppCompatActivity() {
 
     private fun handleError(error: Throwable) {
         errorViewLayout.btRetry.setOnClickListener {
-            wordsViewModel.getUsers()
+            usersViewModel.getUsers()
         }
     }
 
@@ -105,9 +99,8 @@ class UsersListActivity : AppCompatActivity() {
         progressBar.visibility = if (show) View.VISIBLE else View.GONE
     }
 
-
     private fun handleSuccess(data: List<UserUiModel>) {
-        adapter.setList(data)
+        usersAdapter.setList(data)
     }
 
 }
