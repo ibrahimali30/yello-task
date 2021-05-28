@@ -39,7 +39,7 @@ class ReceiverMainActivity : AppCompatActivity() {
 
             showNewUserDialog(
                 it.name,
-                "do you want to add ${it.username}",
+                "do you want to save ${it.name} ?",
                 onConfirmed = {
                     serverThread.replyResponseToMiddleMan("OK")
                     wordsViewModel.insertUserInToLocalDB(it)
