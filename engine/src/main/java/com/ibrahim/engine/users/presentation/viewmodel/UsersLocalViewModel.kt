@@ -36,7 +36,7 @@ class UsersLocalViewModel @Inject constructor(
             .subscribe({
                 it
             }, {
-
+                it
             }).addTo(compositeDisposable)
     }
 

@@ -43,7 +43,12 @@ class UsersListActivity : AppCompatActivity() {
 
     private fun onUserClicked(user: UserUiModel){
         setBroadCastToMiddleMan(user)
+        openReceiverActivity()
+    }
+
+    private fun openReceiverActivity() {
         val intent = Intent()
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         intent.component =
             ComponentName(
                 "com.ibrahim.receiver", "com.ibrahim.receiver.ReceiverMainActivity"

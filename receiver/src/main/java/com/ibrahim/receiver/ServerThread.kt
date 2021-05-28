@@ -37,7 +37,8 @@ class ServerThread() : Thread() {
             }
 
         } catch (e: IOException) {
-            socket.close()
+            e.printStackTrace()
+//            socket.close()
         }
     }
 
