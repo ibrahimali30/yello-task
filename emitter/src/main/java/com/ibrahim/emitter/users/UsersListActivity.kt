@@ -9,6 +9,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ibrahim.emitter.EmitterProdCastReceiver
 import com.ibrahim.emitter.R
+import com.ibrahim.emitter.base.extensions.showNewUserDialog
 import com.ibrahim.emitter.users.adapter.UsersAdapter
 import com.ibrahim.engine.base.*
 import com.ibrahim.engine.users.data.model.UserUiModel
@@ -38,13 +39,22 @@ class UsersListActivity : AppCompatActivity() {
     }
 
     private fun onUserClicked(user: UserUiModel){
+        showNewUserDialog(
+            "Send",
+            "sending the data to middleMan app ?",
+            onConfirmed = {
+                sendDataToMiddleMan(user)
+            },onCanceled = {}
+        )
+    }
+
+    private fun sendDataToMiddleMan(user: UserUiModel) {
         sendBroadCastToMiddleMan(user)
         openReceiverActivity()
     }
 
     private fun openReceiverActivity() {
         val intent = Intent()
-//        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         intent.component =
             ComponentName(
                 RECEIVER_PACKAGE_NAME, RECEIVER_MAIN_ACTIVITY_PACKAGE_NAME
