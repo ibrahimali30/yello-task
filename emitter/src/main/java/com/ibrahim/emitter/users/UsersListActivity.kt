@@ -8,11 +8,11 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ibrahim.emitter.R
 import com.ibrahim.emitter.base.extensions.showNewUserDialog
-import com.ibrahim.emitter.users.adapter.UsersAdapter
+import com.ibrahim.emitter.adapter.UsersAdapter
 import com.ibrahim.engine.base.*
-import com.ibrahim.engine.users.data.model.UserUiModel
-import com.ibrahim.engine.users.domain.mapper.toJson
-import com.ibrahim.engine.users.presentation.viewmodel.UsersViewModel
+import com.ibrahim.engine.data.model.UserUiModel
+import com.ibrahim.engine.domain.mapper.toJson
+import com.ibrahim.engine.viewmodel.UsersViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.layout_error_view.view.*

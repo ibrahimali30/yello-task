@@ -1,13 +1,11 @@
 package com.ibrahim.receiver.users
 
-import android.content.ComponentName
-import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ibrahim.receiver.users.adapter.UsersAdapter
-import com.ibrahim.engine.users.presentation.viewmodel.UsersLocalViewModel
+import com.ibrahim.engine.viewmodel.UsersLocalViewModel
 import com.ibrahim.receiver.R
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_saved_users.*

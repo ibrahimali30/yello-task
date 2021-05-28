@@ -2,8 +2,8 @@ package com.ibrahim.receiver
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
-import com.ibrahim.engine.users.data.model.UserUiModel
-import com.ibrahim.engine.users.domain.mapper.userJsonToUserModel
+import com.ibrahim.engine.data.model.UserUiModel
+import com.ibrahim.engine.domain.mapper.userJsonToUserModel
 import java.io.BufferedReader
 import java.io.IOException
 import java.io.InputStreamReader

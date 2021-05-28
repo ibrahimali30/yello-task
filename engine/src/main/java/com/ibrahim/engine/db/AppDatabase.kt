@@ -2,8 +2,8 @@ package com.ibrahim.engine.db
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.ibrahim.engine.users.data.model.UserUiModel
-import com.ibrahim.engine.users.data.source.local.UserDao
+import com.ibrahim.engine.data.model.UserUiModel
+import com.ibrahim.engine.data.source.local.UserDao
 
 @Database(
     entities = [
