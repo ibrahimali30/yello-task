@@ -2,7 +2,6 @@ package com.ibrahim.emitter.users
 
 import android.content.ComponentName
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -12,9 +11,10 @@ import com.ibrahim.emitter.R
 import com.ibrahim.engine.base.EXTRA_USER
 import com.ibrahim.engine.base.MIDDLE_MAN_PACKAGE_NAME
 import com.ibrahim.engine.base.MIDDLE_MAN_RECEIVER_NAME
-import com.ibrahim.engine.users.data.model.UsersResponseItem
+import com.ibrahim.engine.users.data.model.UserUiModel
 import com.ibrahim.emitter.users.adapter.UsersAdapter
 import com.ibrahim.engine.base.MIDDLE_MAN_RECEIVER_PACKAGE_NAME
+import com.ibrahim.engine.users.domain.mapper.toJson
 import com.ibrahim.engine.users.presentation.viewmodel.UsersViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.*
@@ -41,7 +41,7 @@ class UsersListActivity : AppCompatActivity() {
 
     }
 
-    private fun onUserClicked(user: UsersResponseItem){
+    private fun onUserClicked(user: UserUiModel){
         setBroadCastToMiddleMan(user)
         val intent = Intent()
         intent.component =
@@ -51,7 +51,7 @@ class UsersListActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-    private fun setBroadCastToMiddleMan(user: UsersResponseItem) {
+    private fun setBroadCastToMiddleMan(user: UserUiModel) {
         val intent = Intent(MIDDLE_MAN_RECEIVER_NAME)
         intent.action = MIDDLE_MAN_PACKAGE_NAME
         intent.putExtra(EXTRA_USER, user.toJson())
@@ -101,7 +101,7 @@ class UsersListActivity : AppCompatActivity() {
     }
 
 
-    private fun handleSuccess(data: List<UsersResponseItem>) {
+    private fun handleSuccess(data: List<UserUiModel>) {
         adapter.setList(data)
     }
 

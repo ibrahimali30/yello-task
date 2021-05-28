@@ -2,7 +2,7 @@ package com.ibrahim.receiver
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
-import com.ibrahim.engine.users.data.model.UsersResponseItem
+import com.ibrahim.engine.users.data.model.UserUiModel
 import com.ibrahim.engine.users.domain.mapper.userJsonToUserModel
 import java.io.BufferedReader
 import java.io.IOException
@@ -15,7 +15,7 @@ import kotlin.concurrent.thread
 
 class ServerThread() : Thread() {
 
-    val liveData = MutableLiveData<UsersResponseItem>()
+    val liveData = MutableLiveData<UserUiModel>()
     private val TAG = "log*** receiver"
 
     lateinit var serverSocket: ServerSocket

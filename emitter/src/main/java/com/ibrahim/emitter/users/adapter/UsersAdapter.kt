@@ -6,12 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.ibrahim.emitter.R
-import com.ibrahim.engine.users.data.model.UsersResponseItem
+import com.ibrahim.engine.users.data.model.UserUiModel
 import kotlinx.android.synthetic.main.layout_words_item.view.*
 
 class UsersAdapter(
-    val data: ArrayList<UsersResponseItem> = java.util.ArrayList(),
-    val onItemClicked: (UsersResponseItem)-> Unit
+    val data: ArrayList<UserUiModel> = java.util.ArrayList(),
+    val onItemClicked: (UserUiModel)-> Unit
 ) :
     RecyclerView.Adapter<UsersAdapter.ViewHolder>() {
 
@@ -35,7 +35,7 @@ class UsersAdapter(
         }
     }
 
-    fun setList(list: List<UsersResponseItem>) {
+    fun setList(list: List<UserUiModel>) {
         data.clear()
         data.addAll(list)
         notifyDataSetChanged()
@@ -49,7 +49,7 @@ class UsersAdapter(
     class ViewHolder constructor(var view: View) : RecyclerView.ViewHolder(view) {
 
         @SuppressLint("CheckResult")
-        fun bind(model: UsersResponseItem) {
+        fun bind(model: UserUiModel) {
             view.tvWordTitle.text = model.name
             view.tvWordCount.text = model.username
 

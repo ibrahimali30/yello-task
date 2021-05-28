@@ -1,4 +1,4 @@
-package com.ibrahim.emitter.users.di
+package com.ibrahim.engine.users.di
 
 import com.google.gson.GsonBuilder
 import com.ibrahim.engine.base.BASE_URL

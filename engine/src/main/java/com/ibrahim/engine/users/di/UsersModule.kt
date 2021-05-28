@@ -1,4 +1,4 @@
-package com.ibrahim.emitter.users.di
+package com.ibrahim.engine.users.di
 
 
 import com.ibrahim.engine.users.data.repository.UsersRepositoryImpl

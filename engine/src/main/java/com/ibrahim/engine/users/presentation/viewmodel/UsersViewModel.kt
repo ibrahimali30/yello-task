@@ -3,7 +3,7 @@ package com.ibrahim.engine.users.presentation.viewmodel
 import android.os.Handler
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.ibrahim.engine.users.data.model.UsersResponse
+import com.ibrahim.engine.users.data.model.UserUiModel
 import com.ibrahim.engine.users.domain.interactor.GetUsersUseCase
 import io.reactivex.Observer
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -39,14 +39,14 @@ class UsersViewModel @Inject constructor(
         screenState.value = UsersScreenState.ErrorLoadingFromApi(it)
     }
 
-    private fun handleSuccess(it: UsersResponse) {
+    private fun handleSuccess(it: List<UserUiModel>) {
         screenState.value = UsersScreenState.SuccessAPIResponse(it)
     }
 
     sealed class UsersScreenState {
         object Loading : UsersScreenState()
         class ErrorLoadingFromApi(val error: Throwable) : UsersScreenState()
-        class SuccessAPIResponse(val data: UsersResponse) : UsersScreenState()
+        class SuccessAPIResponse(val data: List<UserUiModel>) : UsersScreenState()
 
     }
 

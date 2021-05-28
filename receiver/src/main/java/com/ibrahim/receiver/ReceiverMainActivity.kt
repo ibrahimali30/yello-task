@@ -8,42 +8,29 @@ import android.util.Log
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
+import com.ibrahim.engine.users.presentation.viewmodel.UsersLocalViewModel
+import com.ibrahim.engine.users.presentation.viewmodel.UsersViewModel
 import com.ibrahim.receiver.presentation.showNewUserDialog
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 import kotlin.concurrent.thread
 
-
+@AndroidEntryPoint
 class ReceiverMainActivity : AppCompatActivity() {
 
     lateinit var serverThread: ServerThread
 
+    @Inject
+    lateinit var wordsViewModel: UsersLocalViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_receiver_main)
-        Log.d("log***", "onCreate: receiver")
 
         startServerService()
-
-//        delay (1000) { response("test response") }
-//        delay (2000) { response("test response") }
-//        delay (3000) { response("test response") }
-
+        wordsViewModel.getUsersFromLocalDB()
 
     }
-
-    private fun delay(delay: Long = 1000, function: () -> Unit = {}) {
-        Handler().postDelayed({
-            function()
-        },delay)
-    }
-
-    private fun response(s: String) {
-        thread {
-//            serverThread.reply(s)
-        }
-
-    }
-
 
     private fun startServerService() {
         serverThread  = ServerThread()
@@ -56,6 +43,7 @@ class ReceiverMainActivity : AppCompatActivity() {
                 "do you want to add ${it.username}",
                 {
                     serverThread.replyResponseToMiddleMan("OK")
+                    wordsViewModel.insertUserInToLocalDB(it)
                 },{
                     serverThread.replyResponseToMiddleMan("NOK")
                 }
