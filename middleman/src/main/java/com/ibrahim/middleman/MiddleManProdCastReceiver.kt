@@ -40,10 +40,9 @@ class MiddleManProdCastReceiver : BroadcastReceiver() {
                 if (response.isNotEmpty()) {
                     Log.i(TAG, "response from receiver to middleman: $response")
 
-                    sendConfirmationToEmitter(
-                        applicationContext,
-                        response
-                    )
+                    sendConfirmationToEmitter(applicationContext, response)
+
+
                 }
 
                 socket.close()

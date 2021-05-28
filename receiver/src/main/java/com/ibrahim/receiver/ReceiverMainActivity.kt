@@ -1,10 +1,13 @@
 package com.ibrahim.receiver
 
 
+import android.content.ComponentName
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
+import com.ibrahim.engine.base.EMITTER_MAIN_ACTIVITY_PACKAGE_NAME
+import com.ibrahim.engine.base.EMITTER_PACKAGE_NAME
 import com.ibrahim.engine.users.presentation.viewmodel.UsersLocalViewModel
 import com.ibrahim.receiver.presentation.showNewUserDialog
 import com.ibrahim.receiver.users.UsersListActivity
@@ -46,8 +49,17 @@ class ReceiverMainActivity : AppCompatActivity() {
                 }
             ).also {
                 it?.setCancelable(false)
+            }?.setOnDismissListener {
+                navigateToEmitterActivity()
             }
         })
+    }
+
+    private fun navigateToEmitterActivity() {
+        val intent = Intent()
+        intent.component =
+            ComponentName(EMITTER_PACKAGE_NAME, EMITTER_MAIN_ACTIVITY_PACKAGE_NAME)
+        startActivity(intent)
     }
 
     private fun initViews() {

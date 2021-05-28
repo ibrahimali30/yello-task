@@ -1,16 +1,17 @@
 package com.ibrahim.emitter.users
 
-import android.content.ComponentName
-import android.content.Intent
+import android.content.*
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.ibrahim.emitter.EmitterProdCastReceiver
 import com.ibrahim.emitter.R
-import com.ibrahim.engine.users.data.model.UserUiModel
 import com.ibrahim.emitter.users.adapter.UsersAdapter
 import com.ibrahim.engine.base.*
+import com.ibrahim.engine.users.data.model.UserUiModel
 import com.ibrahim.engine.users.domain.mapper.toJson
 import com.ibrahim.engine.users.presentation.viewmodel.UsersViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -33,7 +34,7 @@ class UsersListActivity : AppCompatActivity() {
         usersViewModel.getUsers()
         observeScreenState()
         initRecyclerView()
-
+        uiContext = this
     }
 
     private fun onUserClicked(user: UserUiModel){
@@ -103,4 +104,8 @@ class UsersListActivity : AppCompatActivity() {
         usersAdapter.setList(data)
     }
 
+    companion object{
+        //bad practice
+        lateinit var uiContext: Context
+    }
 }
