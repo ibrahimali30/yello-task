@@ -22,14 +22,13 @@
         </activity>
 
         <receiver
-            android:name=".EmitterProdCastReceiver"
+            android:name=".receiver.EmitterProdCastReceiver"
             android:enabled="true"
             android:exported="true" >
             <intent-filter>
                 <action android:name="com.ibrahim.emitter.ACTION_USER_ACTION_RESPONSE" />
             </intent-filter>
         </receiver>
-
 
     </application>
 

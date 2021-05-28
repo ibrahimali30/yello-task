@@ -2,12 +2,10 @@ package com.ibrahim.emitter.users
 
 import android.content.*
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.ibrahim.emitter.EmitterProdCastReceiver
 import com.ibrahim.emitter.R
 import com.ibrahim.emitter.base.extensions.showNewUserDialog
 import com.ibrahim.emitter.users.adapter.UsersAdapter
