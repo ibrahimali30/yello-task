@@ -1,16 +1,21 @@
 package com.ibrahim.receiver
 
 import android.util.Log
+import androidx.lifecycle.MutableLiveData
+import com.ibrahim.engine.users.data.model.UsersResponseItem
+import com.ibrahim.engine.users.domain.mapper.userJsonToUserModel
 import java.io.BufferedReader
 import java.io.IOException
 import java.io.InputStreamReader
 import java.io.PrintWriter
 import java.net.ServerSocket
 import java.net.Socket
+import kotlin.concurrent.thread
 
 
-class ServerThread : Thread() {
+class ServerThread() : Thread() {
 
+    val liveData = MutableLiveData<UsersResponseItem>()
     private val TAG = "log*** receiver"
 
     lateinit var serverSocket: ServerSocket
@@ -25,7 +30,6 @@ class ServerThread : Thread() {
             serverSocket = ServerSocket(8080)
             serverSocket.reuseAddress = true
             connectSocket()
-
             while (true) {
                 val userJson = reader.readLine() ?: ""
                 handleReceivedSocketMessage(userJson)
@@ -39,14 +43,20 @@ class ServerThread : Thread() {
 
     private fun handleReceivedSocketMessage(userJson: String) {
         Log.d(TAG, "handleReceivedSocketMessage: $userJson")
-
-        // TODO: 5/27/2021 parse user json to user object
+        liveData.postValue(userJsonToUserModel(userJson))
     }
 
     private fun connectSocket() {
         socket = serverSocket.accept()
         writer = PrintWriter(socket.getOutputStream())
         reader = BufferedReader(InputStreamReader(socket.getInputStream()))
+    }
+
+    fun replyResponseToMiddleMan(response: String) {
+        thread {
+            writer.write(response + "\n")
+            writer.flush()
+        }
     }
 
 }

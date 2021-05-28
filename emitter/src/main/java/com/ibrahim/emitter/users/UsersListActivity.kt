@@ -2,6 +2,7 @@ package com.ibrahim.emitter.users
 
 import android.content.ComponentName
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -13,6 +14,7 @@ import com.ibrahim.engine.base.MIDDLE_MAN_PACKAGE_NAME
 import com.ibrahim.engine.base.MIDDLE_MAN_RECEIVER_NAME
 import com.ibrahim.engine.users.data.model.UsersResponseItem
 import com.ibrahim.emitter.users.adapter.UsersAdapter
+import com.ibrahim.engine.base.MIDDLE_MAN_RECEIVER_PACKAGE_NAME
 import com.ibrahim.engine.users.presentation.viewmodel.UsersViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.*
@@ -21,7 +23,7 @@ import javax.inject.Inject
 
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity() {
+class UsersListActivity : AppCompatActivity() {
 
     @Inject
     lateinit var wordsViewModel: UsersViewModel
@@ -41,6 +43,12 @@ class MainActivity : AppCompatActivity() {
 
     private fun onUserClicked(user: UsersResponseItem){
         setBroadCastToMiddleMan(user)
+        val intent = Intent()
+        intent.component =
+            ComponentName(
+                "com.ibrahim.receiver", "com.ibrahim.receiver.ReceiverMainActivity"
+            )
+        startActivity(intent)
     }
 
     private fun setBroadCastToMiddleMan(user: UsersResponseItem) {
@@ -50,8 +58,7 @@ class MainActivity : AppCompatActivity() {
         intent.addFlags(Intent.FLAG_INCLUDE_STOPPED_PACKAGES)
         intent.component =
             ComponentName(
-                MIDDLE_MAN_PACKAGE_NAME,
-                "${MIDDLE_MAN_PACKAGE_NAME}.MiddleManProdCastReceiver"
+                MIDDLE_MAN_PACKAGE_NAME, MIDDLE_MAN_RECEIVER_PACKAGE_NAME
             )
         sendBroadcast(intent)
     }
