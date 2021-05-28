@@ -1,4 +1,4 @@
-package com.ibrahim.receiver.presentation
+package com.ibrahim.receiver.base
 
 import android.content.Context
 import androidx.appcompat.app.AlertDialog

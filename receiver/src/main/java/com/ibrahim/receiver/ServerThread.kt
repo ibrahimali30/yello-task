@@ -16,7 +16,6 @@ import kotlin.concurrent.thread
 class ServerThread() : Thread() {
 
     val liveData = MutableLiveData<UserUiModel>()
-    private val TAG = "log*** receiver"
 
     lateinit var serverSocket: ServerSocket
     lateinit var socket: Socket
@@ -43,7 +42,6 @@ class ServerThread() : Thread() {
     }
 
     private fun handleReceivedSocketMessage(userJson: String) {
-        Log.d(TAG, "handleReceivedSocketMessage e: $userJson")
         liveData.postValue(userJsonToUserModel(userJson))
     }
 

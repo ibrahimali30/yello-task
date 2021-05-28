@@ -9,8 +9,8 @@ import androidx.lifecycle.Observer
 import com.ibrahim.engine.base.EMITTER_MAIN_ACTIVITY_PACKAGE_NAME
 import com.ibrahim.engine.base.EMITTER_PACKAGE_NAME
 import com.ibrahim.engine.viewmodel.UsersLocalViewModel
-import com.ibrahim.receiver.presentation.showNewUserDialog
-import com.ibrahim.receiver.users.UsersListActivity
+import com.ibrahim.receiver.base.showNewUserDialog
+import com.ibrahim.receiver.users.activity.UsersListActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_receiver_main.*
 import javax.inject.Inject

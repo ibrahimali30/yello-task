@@ -1,4 +1,4 @@
-package com.ibrahim.receiver.users
+package com.ibrahim.receiver.users.activity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
